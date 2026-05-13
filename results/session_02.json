@@ -1,0 +1,209 @@
+{
+  "dialogue_id": "MUL0161.json",
+  "services": [
+    "restaurant",
+    "taxi",
+    "hotel"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "intent_f1": 0.0,
+      "slot_f1": 1.0,
+      "gt_intents": [
+        "restaurant:find_restaurant",
+        "hotel:find_hotel"
+      ],
+      "pred_intents": [
+        "restaurant:find"
+      ],
+      "gt_slots": {
+        "restaurant.restaurant-area": [
+          "centre"
+        ],
+        "restaurant.restaurant-pricerange": [
+          "expensive"
+        ]
+      },
+      "pred_slots": {
+        "restaurant.restaurant-pricerange": [
+          "expensive"
+        ],
+        "restaurant.restaurant-area": [
+          "center"
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "restaurant:book_restaurant",
+        "hotel:find_hotel"
+      ],
+      "pred_intents": [
+        "restaurant-book"
+      ],
+      "gt_slots": {
+        "restaurant.restaurant-bookday": [
+          "friday"
+        ],
+        "restaurant.restaurant-bookpeople": [
+          "1"
+        ],
+        "restaurant.restaurant-booktime": [
+          "16:45"
+        ],
+        "restaurant.restaurant-name": [
+          "cambridge chop house"
+        ]
+      },
+      "pred_slots": {
+        "restaurant-people": [
+          "1"
+        ],
+        "restaurant-time": [
+          "16:45"
+        ],
+        "restaurant-day": [
+          "friday"
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "intent_f1": 0.0,
+      "slot_f1": 0.667,
+      "gt_intents": [
+        "restaurant:book_restaurant",
+        "taxi:find_taxi",
+        "hotel:find_hotel"
+      ],
+      "pred_intents": [
+        "restaurant.book"
+      ],
+      "gt_slots": {
+        "restaurant.restaurant-booktime": [
+          "15:45"
+        ]
+      },
+      "pred_slots": {
+        "restaurant.restaurant-booktime": [
+          "15:45"
+        ],
+        "restaurant.restaurant-bookday": [
+          "friday"
+        ]
+      }
+    },
+    {
+      "turn": 8,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "restaurant:book_restaurant",
+        "hotel:find_hotel"
+      ],
+      "pred_intents": [
+        "hotel:find"
+      ],
+      "gt_slots": {
+        "hotel.hotel-internet": [
+          "yes"
+        ],
+        "hotel.hotel-parking": [
+          "yes"
+        ],
+        "hotel.hotel-pricerange": [
+          "expensive"
+        ],
+        "hotel.hotel-type": [
+          "hotel"
+        ]
+      },
+      "pred_slots": {
+        "hotel.pricerange": [
+          "expensive"
+        ],
+        "hotel.internet": [
+          "yes"
+        ],
+        "hotel.parking": [
+          "yes"
+        ]
+      }
+    },
+    {
+      "turn": 10,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "restaurant:book_restaurant",
+        "hotel:book_hotel"
+      ],
+      "pred_intents": [
+        "hotel:book"
+      ],
+      "gt_slots": {
+        "hotel.hotel-bookday": [
+          "friday"
+        ],
+        "hotel.hotel-bookpeople": [
+          "1"
+        ],
+        "hotel.hotel-bookstay": [
+          "4"
+        ],
+        "hotel.hotel-name": [
+          "gonville hotel"
+        ]
+      },
+      "pred_slots": {
+        "hotel.people": [
+          "1"
+        ],
+        "hotel.stay_length": [
+          "4"
+        ],
+        "hotel.check_in_day": [
+          "friday"
+        ]
+      }
+    },
+    {
+      "turn": 12,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "taxi:find_taxi",
+        "restaurant:book_restaurant"
+      ],
+      "pred_intents": [
+        "taxi.book"
+      ],
+      "gt_slots": {
+        "taxi.taxi-arriveby": [
+          "15:45"
+        ],
+        "taxi.taxi-departure": [
+          "gonville hotel"
+        ],
+        "taxi.taxi-destination": [
+          "cambridge chop house"
+        ]
+      },
+      "pred_slots": {
+        "taxi.departure": [
+          "gonville hotel"
+        ],
+        "taxi.destination": [
+          "The Cambridge Chop House"
+        ],
+        "taxi.arriveby": [
+          "15:45"
+        ]
+      }
+    }
+  ]
+}

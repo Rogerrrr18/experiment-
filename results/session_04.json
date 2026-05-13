@@ -1,0 +1,116 @@
+{
+  "dialogue_id": "PMUL4434.json",
+  "services": [
+    "restaurant",
+    "attraction",
+    "train",
+    "hotel"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "intent_f1": 0.0,
+      "slot_f1": 0.5,
+      "gt_intents": [
+        "restaurant:find_restaurant",
+        "hotel:find_hotel",
+        "attraction:find_attraction"
+      ],
+      "pred_intents": [
+        "hotel:find"
+      ],
+      "gt_slots": {
+        "attraction.attraction-area": [
+          "centre"
+        ],
+        "hotel.hotel-area": [
+          "centre"
+        ],
+        "restaurant.restaurant-area": [
+          "centre"
+        ]
+      },
+      "pred_slots": {
+        "hotel.hotel-area": [
+          "centre"
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "train:find_train"
+      ],
+      "pred_intents": [
+        "train.find_train"
+      ],
+      "gt_slots": {
+        "train.train-arriveby": [
+          "17:30"
+        ],
+        "train.train-departure": [
+          "cambridge"
+        ]
+      },
+      "pred_slots": {
+        "train.departure": [
+          "cambridge"
+        ],
+        "train.arriveby": [
+          "17:30"
+        ]
+      }
+    },
+    {
+      "turn": 6,
+      "intent_f1": 0.0,
+      "slot_f1": 1.0,
+      "gt_intents": [
+        "train:find_train"
+      ],
+      "pred_intents": [
+        "train:inform"
+      ],
+      "gt_slots": {
+        "train.train-day": [
+          "tuesday"
+        ],
+        "train.train-destination": [
+          "london liverpool street"
+        ]
+      },
+      "pred_slots": {
+        "train.train-day": [
+          "Tuesday"
+        ],
+        "train.train-destination": [
+          "London Liverpool Street"
+        ]
+      }
+    },
+    {
+      "turn": 8,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "train:book_train"
+      ],
+      "pred_intents": [
+        "train.book",
+        "train.request_reference"
+      ],
+      "gt_slots": {
+        "train.train-bookpeople": [
+          "2"
+        ]
+      },
+      "pred_slots": {
+        "train.people": [
+          "2"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "dialogue_id": "PMUL4369.json",
+  "services": [
+    "bus",
+    "hotel"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "bus:find_bus",
+        "train:find_train"
+      ],
+      "pred_intents": [
+        "bus:find"
+      ],
+      "gt_slots": {
+        "bus.bus-departure": [
+          "cambridge"
+        ]
+      },
+      "pred_slots": {
+        "bus.area": [
+          "Cambridge"
+        ]
+      }
+    },
+    {
+      "turn": 2,
+      "intent_f1": 0.0,
+      "slot_f1": 0.0,
+      "gt_intents": [
+        "bus:find_bus",
+        "train:find_train"
+      ],
+      "pred_intents": [
+        "bus:inform"
+      ],
+      "gt_slots": {
+        "bus.bus-destination": [
+          "london",
+          "london kings cross"
+        ]
+      },
+      "pred_slots": {
+        "bus.destination": [
+          "london"
+        ]
+      }
+    },
+    {
+      "turn": 4,
+      "intent_f1": 0.0,
+      "slot_f1": 1.0,
+      "gt_intents": [
+        "hotel:find_hotel",
+        "train:find_train"
+      ],
+      "pred_intents": [
+        "hotel"
+      ],
+      "gt_slots": {
+        "hotel.hotel-area": [
+          "west"
+        ]
+      },
+      "pred_slots": {
+        "hotel.hotel-area": [
+          "west side"
+        ]
+      }
+    }
+  ]
+}

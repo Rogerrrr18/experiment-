@@ -1,0 +1,1437 @@
+{
+  "experiment": "multiwoz_slot_filling",
+  "model": "deepseek-v4-pro",
+  "total_sessions": 10,
+  "total_user_turns_evaluated": 43,
+  "avg_intent_f1": 0.023,
+  "avg_slot_key_f1": 0.426,
+  "details": [
+    {
+      "dialogue_id": "PMUL3969.json",
+      "services": [
+        "hotel"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:find"
+          ],
+          "gt_slots": {
+            "hotel.hotel-internet": [
+              "yes"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-internet": [
+              "free"
+            ]
+          },
+          "turn_num": 0,
+          "utterance": "i am new here. i need a place to stay with free wifi"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.5,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 0.667,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:inform"
+          ],
+          "gt_slots": {
+            "hotel.hotel-pricerange": [
+              "cheap"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-pricerange": [
+              "cheap"
+            ],
+            "hotel.hotel-internet": [
+              "yes"
+            ]
+          },
+          "turn_num": 2,
+          "utterance": "cheaper the better free wifi too"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:inform"
+          ],
+          "gt_slots": {
+            "hotel.hotel-area": [
+              "dontcare"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-area": [
+              "dontcare"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "No particular area, whatever you suggest."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel"
+          ],
+          "pred_intents": [
+            "hotel:book"
+          ],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "saturday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "5"
+            ],
+            "hotel.hotel-bookstay": [
+              "2"
+            ],
+            "hotel.hotel-name": [
+              "alexander bed and breakfast"
+            ]
+          },
+          "pred_slots": {
+            "hotel.booking_nights": [
+              "2"
+            ],
+            "hotel.booking_people": [
+              "5"
+            ],
+            "hotel.start_day": [
+              "Saturday"
+            ]
+          },
+          "turn_num": 6,
+          "utterance": "Yes please book 2 nights for 5 people, starting on Saturday."
+        }
+      ]
+    },
+    {
+      "dialogue_id": "PMUL3071.json",
+      "services": [
+        "attraction",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "attraction:find_attraction"
+          ],
+          "pred_intents": [
+            "attraction:find"
+          ],
+          "gt_slots": {
+            "attraction.attraction-name": [
+              "adc theatre"
+            ]
+          },
+          "pred_slots": {
+            "attraction.attraction-name": [
+              "adc theatre"
+            ]
+          },
+          "turn_num": 0,
+          "utterance": "i'm looking for adc theatre"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:search"
+          ],
+          "gt_slots": {
+            "hotel.hotel-name": [
+              "gonville hotel"
+            ]
+          },
+          "pred_slots": {
+            "hotel.name": [
+              "Gonville Hotel"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "Yes, I need information about the Gonville Hotel, please."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel"
+          ],
+          "pred_intents": [],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "friday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "5"
+            ],
+            "hotel.hotel-bookstay": [
+              "5"
+            ]
+          },
+          "pred_slots": {},
+          "turn_num": 6,
+          "utterance": "Well, I'd like to book a room for 5 people, beginning on Friday for 5 days. Can "
+        }
+      ]
+    },
+    {
+      "dialogue_id": "MUL0161.json",
+      "services": [
+        "restaurant",
+        "taxi",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.5,
+          "gt_intents": [
+            "hotel:find_hotel",
+            "restaurant:find_restaurant"
+          ],
+          "pred_intents": [
+            "restaurant:find"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-area": [
+              "centre"
+            ],
+            "restaurant.restaurant-pricerange": [
+              "expensive"
+            ]
+          },
+          "pred_slots": {
+            "restaurant.restaurant-area": [
+              "center of town"
+            ],
+            "restaurant.restaurant-pricerange": [
+              "expensive"
+            ]
+          },
+          "turn_num": 0,
+          "utterance": "I'm looking for an expensive restaurant in the center of town."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel",
+            "restaurant:book_restaurant"
+          ],
+          "pred_intents": [
+            "restaurant:book"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-bookday": [
+              "friday"
+            ],
+            "restaurant.restaurant-bookpeople": [
+              "1"
+            ],
+            "restaurant.restaurant-booktime": [
+              "16:45"
+            ],
+            "restaurant.restaurant-name": [
+              "cambridge chop house"
+            ]
+          },
+          "pred_slots": {
+            "restaurant.book_day": [
+              "friday"
+            ],
+            "restaurant.book_time": [
+              "16:45"
+            ],
+            "restaurant.book_people": [
+              "1"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "I need to book a table for 1 person at 16:45 on friday."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel",
+            "restaurant:book_restaurant",
+            "taxi:find_taxi"
+          ],
+          "pred_intents": [
+            "restaurant:book"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-booktime": [
+              "15:45"
+            ]
+          },
+          "pred_slots": {
+            "restaurant-restaurant-booktime": [
+              "15:45"
+            ],
+            "restaurant-restaurant-bookday": [
+              "friday"
+            ]
+          },
+          "turn_num": 6,
+          "utterance": "Yes. How about 15:45 on Friday instead?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 0.75,
+          "slot_key_f1": 0.857,
+          "slot_value_accuracy": 0.667,
+          "gt_intents": [
+            "hotel:find_hotel",
+            "restaurant:book_restaurant"
+          ],
+          "pred_intents": [
+            "hotel:search"
+          ],
+          "gt_slots": {
+            "hotel.hotel-internet": [
+              "yes"
+            ],
+            "hotel.hotel-parking": [
+              "yes"
+            ],
+            "hotel.hotel-pricerange": [
+              "expensive"
+            ],
+            "hotel.hotel-type": [
+              "hotel"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-pricerange": [
+              "expensive"
+            ],
+            "hotel.hotel-internet": [
+              "free wifi"
+            ],
+            "hotel.hotel-parking": [
+              "yes"
+            ]
+          },
+          "turn_num": 8,
+          "utterance": "I'm also looking for a place to stay. Ideally a hotel with free wifi and parking"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel",
+            "restaurant:book_restaurant"
+          ],
+          "pred_intents": [
+            "hotel:book"
+          ],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "friday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "1"
+            ],
+            "hotel.hotel-bookstay": [
+              "4"
+            ],
+            "hotel.hotel-name": [
+              "gonville hotel"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-book_people": [
+              "1"
+            ],
+            "hotel.hotel-book_stay": [
+              "4"
+            ],
+            "hotel.hotel-book_day": [
+              "friday"
+            ]
+          },
+          "turn_num": 10,
+          "utterance": "Great can you book it for one person, for 4 nights starting friday?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "restaurant:book_restaurant",
+            "taxi:find_taxi"
+          ],
+          "pred_intents": [
+            "taxi:book"
+          ],
+          "gt_slots": {
+            "taxi.taxi-arriveby": [
+              "15:45"
+            ],
+            "taxi.taxi-departure": [
+              "gonville hotel"
+            ],
+            "taxi.taxi-destination": [
+              "cambridge chop house"
+            ]
+          },
+          "pred_slots": {
+            "taxi-arriveby": [
+              "15:45"
+            ]
+          },
+          "turn_num": 12,
+          "utterance": "I also need to book a taxi to commute between the two. I'd like to arrive prior "
+        }
+      ]
+    },
+    {
+      "dialogue_id": "PMUL4369.json",
+      "services": [
+        "bus",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "bus:find_bus",
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "bus:query"
+          ],
+          "gt_slots": {
+            "bus.bus-departure": [
+              "cambridge"
+            ]
+          },
+          "pred_slots": {
+            "bus.area": [
+              "cambridge"
+            ]
+          },
+          "turn_num": 0,
+          "utterance": "How much does it cost to take the bus in Cambridge?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "bus:find_bus",
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "bus:inform"
+          ],
+          "gt_slots": {
+            "bus.bus-destination": [
+              "london",
+              "london kings cross"
+            ]
+          },
+          "pred_slots": {
+            "bus.destination": [
+              "london"
+            ]
+          },
+          "turn_num": 2,
+          "utterance": "I will be traveling to london."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel",
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "hotel:search"
+          ],
+          "gt_slots": {
+            "hotel.hotel-area": [
+              "west"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-area": [
+              "west side"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "I am also looking for a hotel in the west side of Cambridge. Can you help me?"
+        }
+      ]
+    },
+    {
+      "dialogue_id": "PMUL4434.json",
+      "services": [
+        "restaurant",
+        "attraction",
+        "train",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "attraction:find_attraction",
+            "hotel:find_hotel",
+            "restaurant:find_restaurant"
+          ],
+          "pred_intents": [],
+          "gt_slots": {
+            "attraction.attraction-area": [
+              "centre"
+            ],
+            "hotel.hotel-area": [
+              "centre"
+            ],
+            "restaurant.restaurant-area": [
+              "centre"
+            ]
+          },
+          "pred_slots": {},
+          "turn_num": 0,
+          "utterance": "Can you find me a place in the centre of town?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "train:find"
+          ],
+          "gt_slots": {
+            "train.train-arriveby": [
+              "17:30"
+            ],
+            "train.train-departure": [
+              "cambridge"
+            ]
+          },
+          "pred_slots": {
+            "train.train-departure": [
+              "cambridge"
+            ],
+            "train.train-arriveby": [
+              "17:30"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "Perfect. I also need a train departing from cambridge and arriving by 17:30."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "train:search"
+          ],
+          "gt_slots": {
+            "train.train-day": [
+              "tuesday"
+            ],
+            "train.train-destination": [
+              "london liverpool street"
+            ]
+          },
+          "pred_slots": {
+            "train.train-destination": [
+              "London Liverpool Street"
+            ],
+            "train.train-day": [
+              "Tuesday"
+            ]
+          },
+          "turn_num": 6,
+          "utterance": "Yes, Tuesday going to London Liverpool Street."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "train:book_train"
+          ],
+          "pred_intents": [
+            "train:book"
+          ],
+          "gt_slots": {
+            "train.train-bookpeople": [
+              "2"
+            ]
+          },
+          "pred_slots": {
+            "train.train-people": [
+              "2"
+            ]
+          },
+          "turn_num": 8,
+          "utterance": "Yes, please. I need a booking for 2 people. Will you send me the reference numbe"
+        }
+      ]
+    },
+    {
+      "dialogue_id": "SNG1130.json",
+      "services": [
+        "attraction"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "attraction:find_attraction"
+          ],
+          "pred_intents": [
+            "attraction:find"
+          ],
+          "gt_slots": {
+            "attraction.attraction-area": [
+              "centre"
+            ]
+          },
+          "pred_slots": {
+            "attraction.area": [
+              "town centre"
+            ]
+          },
+          "turn_num": 0,
+          "utterance": "Are there any places to go in the town centre?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "attraction:find_attraction"
+          ],
+          "pred_intents": [
+            "attraction:find"
+          ],
+          "gt_slots": {
+            "attraction.attraction-type": [
+              "nightclub"
+            ]
+          },
+          "pred_slots": {
+            "attraction.attraction-type": [
+              "nightclub"
+            ]
+          },
+          "turn_num": 6,
+          "utterance": "Can you recommend a nightclub?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "attraction:find_attraction"
+          ],
+          "pred_intents": [
+            "attraction:request_info"
+          ],
+          "gt_slots": {
+            "attraction.attraction-name": [
+              "club salsa"
+            ]
+          },
+          "pred_slots": {},
+          "turn_num": 8,
+          "utterance": "Yes please. What's its entrance fee, contact number, and postcode?"
+        }
+      ]
+    },
+    {
+      "dialogue_id": "PMUL3908.json",
+      "services": [
+        "bus",
+        "train",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "bus:find_bus",
+            "train:find_train"
+          ],
+          "pred_intents": [],
+          "gt_slots": {
+            "bus.bus-destination": [
+              "cambridge"
+            ]
+          },
+          "pred_slots": {},
+          "turn_num": 0,
+          "utterance": "I am looking for information in Cambridge"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:search"
+          ],
+          "gt_slots": {
+            "hotel.hotel-name": [
+              "archway house"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-name": [
+              "Archway House"
+            ]
+          },
+          "turn_num": 2,
+          "utterance": "I'm looking for a hotel called, Archway House."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel",
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "hotel:book"
+          ],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "saturday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "2"
+            ],
+            "hotel.hotel-bookstay": [
+              "4"
+            ]
+          },
+          "pred_slots": {
+            "hotel.day": [
+              "saturday"
+            ],
+            "hotel.stay": [
+              "4"
+            ],
+            "hotel.people": [
+              "2"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "Alright. I'd like a room on saturday for 4 nights. 2 people will be staying."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel",
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "train:book"
+          ],
+          "gt_slots": {
+            "train.train-leaveat": [
+              "13:45"
+            ]
+          },
+          "pred_slots": {
+            "train.train-day": [
+              "saturday"
+            ],
+            "train.train-departure": [
+              "after 13:45"
+            ]
+          },
+          "turn_num": 6,
+          "utterance": "I will also need a train for Saturday, leaving after 13:45."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 0.5,
+          "slot_key_f1": 0.667,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "train:inform"
+          ],
+          "gt_slots": {
+            "train.train-day": [
+              "saturday"
+            ],
+            "train.train-destination": [
+              "cambridge"
+            ]
+          },
+          "pred_slots": {
+            "train.train-destination": [
+              "Cambridge"
+            ]
+          },
+          "turn_num": 8,
+          "utterance": "Going to Cambridge."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "train:inform"
+          ],
+          "gt_slots": {
+            "train.train-departure": [
+              "london kings cross"
+            ]
+          },
+          "pred_slots": {
+            "train.train-departure": [
+              "London Kings Cross"
+            ]
+          },
+          "turn_num": 10,
+          "utterance": "I will be departing from London Kings Cross."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "train:book_train"
+          ],
+          "pred_intents": [
+            "train:book"
+          ],
+          "gt_slots": {
+            "train.train-bookpeople": [
+              "2"
+            ]
+          },
+          "pred_slots": {
+            "train.train-people": [
+              "2"
+            ]
+          },
+          "turn_num": 12,
+          "utterance": "There will be 2 people."
+        }
+      ]
+    },
+    {
+      "dialogue_id": "PMUL3000.json",
+      "services": [
+        "taxi",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.5,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:search"
+          ],
+          "gt_slots": {
+            "hotel.hotel-area": [
+              "west"
+            ],
+            "hotel.hotel-internet": [
+              "yes"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-area": [
+              "west"
+            ],
+            "hotel.hotel-internet": [
+              "free"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "The whale of time sounds great. I also need a place to stay that has free intern"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:inform"
+          ],
+          "gt_slots": {
+            "hotel.hotel-stars": [
+              "4"
+            ]
+          },
+          "pred_slots": {
+            "hotel.star_rating": [
+              "4"
+            ]
+          },
+          "turn_num": 6,
+          "utterance": "A 4 star rating please."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:find_hotel",
+            "restaurant:find_restaurant"
+          ],
+          "pred_intents": [
+            "hotel:inform"
+          ],
+          "gt_slots": {
+            "hotel.hotel-pricerange": [
+              "moderate"
+            ]
+          },
+          "pred_slots": {
+            "hotel.price_range": [
+              "moderate"
+            ]
+          },
+          "turn_num": 8,
+          "utterance": "I would like the moderate price range."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:find"
+          ],
+          "gt_slots": {
+            "hotel.hotel-area": [
+              "north"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-area": [
+              "north"
+            ]
+          },
+          "turn_num": 10,
+          "utterance": "Can you try looking in the north?"
+        },
+        {
+          "intent_precision": 1.0,
+          "intent_recall": 1.0,
+          "intent_f1": 1.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel"
+          ],
+          "pred_intents": [
+            "hotel:book_hotel"
+          ],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "wednesday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "6"
+            ],
+            "hotel.hotel-bookstay": [
+              "5"
+            ],
+            "hotel.hotel-name": [
+              "avalon"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-book_stay": [
+              "5"
+            ],
+            "hotel.hotel-book_people": [
+              "6"
+            ],
+            "hotel.hotel-book_day": [
+              "Wednesday"
+            ]
+          },
+          "turn_num": 12,
+          "utterance": "Perfect. I need 5 nights for 6 people starting on Wednesday. Could I have the re"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "taxi:find_taxi"
+          ],
+          "pred_intents": [],
+          "gt_slots": {
+            "taxi.taxi-departure": [
+              "whale of a time"
+            ],
+            "taxi.taxi-destination": [
+              "avalon"
+            ],
+            "taxi.taxi-leaveat": [
+              "06:00"
+            ]
+          },
+          "pred_slots": {},
+          "turn_num": 14,
+          "utterance": "Yes, I'll need a taxi to get to the hotel from whale of a time. I need it to lea"
+        }
+      ]
+    },
+    {
+      "dialogue_id": "SNG01177.json",
+      "services": [],
+      "turns": []
+    },
+    {
+      "dialogue_id": "PMUL3097.json",
+      "services": [
+        "restaurant",
+        "taxi",
+        "attraction",
+        "train"
+      ],
+      "turns": [
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "restaurant:find_restaurant"
+          ],
+          "pred_intents": [
+            "restaurant:find"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-area": [
+              "centre"
+            ],
+            "restaurant.restaurant-food": [
+              "italian"
+            ]
+          },
+          "pred_slots": {
+            "restaurant.restaurant-food": [
+              "Italian"
+            ],
+            "restaurant.restaurant-area": [
+              "centre of town"
+            ]
+          },
+          "turn_num": 0,
+          "utterance": "I am looking for an Italian restaurant in the centre of town."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 1.0,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "restaurant:find_restaurant"
+          ],
+          "pred_intents": [],
+          "gt_slots": {
+            "restaurant.restaurant-pricerange": [
+              "dontcare"
+            ]
+          },
+          "pred_slots": {
+            "restaurant.restaurant-pricerange": [
+              "dontcare"
+            ]
+          },
+          "turn_num": 2,
+          "utterance": "I don't really care."
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "restaurant:book_restaurant",
+            "taxi:find_taxi"
+          ],
+          "pred_intents": [
+            "restaurant:booking"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-bookday": [
+              "tuesday"
+            ],
+            "restaurant.restaurant-bookpeople": [
+              "4"
+            ],
+            "restaurant.restaurant-booktime": [
+              "18:00"
+            ],
+            "restaurant.restaurant-name": [
+              "stazione restaurant and coffee bar"
+            ]
+          },
+          "pred_slots": {
+            "restaurant.reservation-people": [
+              "4"
+            ],
+            "restaurant.reservation-day": [
+              "tuesday"
+            ],
+            "restaurant.reservation-time": [
+              "18:00"
+            ]
+          },
+          "turn_num": 4,
+          "utterance": "Yes please, four people on tuesday at 18:00"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.5,
+          "slot_key_recall": 1.0,
+          "slot_key_f1": 0.667,
+          "slot_value_accuracy": 1.0,
+          "gt_intents": [
+            "attraction:find_attraction"
+          ],
+          "pred_intents": [
+            "attraction:find"
+          ],
+          "gt_slots": {
+            "attraction.attraction-type": [
+              "nightclub"
+            ]
+          },
+          "pred_slots": {
+            "attraction.attraction-type": [
+              "nightclub"
+            ],
+            "attraction.attraction-area": [
+              "town"
+            ]
+          },
+          "turn_num": 6,
+          "utterance": "Can you tell me if you happen to have any nightclubs in town?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 0.0,
+          "slot_key_recall": 0.0,
+          "slot_key_f1": 0.0,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "attraction:find_attraction"
+          ],
+          "pred_intents": [],
+          "gt_slots": {
+            "attraction.attraction-name": [
+              "ballare"
+            ]
+          },
+          "pred_slots": {},
+          "turn_num": 10,
+          "utterance": "What is the postcode for that one?"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 0.5,
+          "slot_key_f1": 0.667,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "taxi:find_taxi",
+            "train:find_train"
+          ],
+          "pred_intents": [
+            "taxi:book"
+          ],
+          "gt_slots": {
+            "taxi.taxi-departure": [
+              "ely"
+            ],
+            "taxi.taxi-destination": [
+              "cambridge"
+            ],
+            "train.train-departure": [
+              "ely"
+            ],
+            "train.train-destination": [
+              "cambridge"
+            ]
+          },
+          "pred_slots": {
+            "taxi.taxi-departure": [
+              "Ely"
+            ],
+            "taxi.taxi-destination": [
+              "Cambridge"
+            ]
+          },
+          "turn_num": 14,
+          "utterance": "Yes Ely to Cambridge please. Thanks"
+        },
+        {
+          "intent_precision": 0.0,
+          "intent_recall": 0.0,
+          "intent_f1": 0.0,
+          "slot_key_precision": 1.0,
+          "slot_key_recall": 0.667,
+          "slot_key_f1": 0.8,
+          "slot_value_accuracy": 0.0,
+          "gt_intents": [
+            "attraction:find_attraction",
+            "taxi:find_taxi"
+          ],
+          "pred_intents": [
+            "taxi:book"
+          ],
+          "gt_slots": {
+            "taxi.taxi-arriveby": [
+              "18:00"
+            ],
+            "taxi.taxi-departure": [
+              "ballare"
+            ],
+            "taxi.taxi-destination": [
+              "stazione restaurant and coffee bar"
+            ]
+          },
+          "pred_slots": {
+            "taxi.taxi-departure": [
+              "the nightclub"
+            ],
+            "taxi.taxi-destination": [
+              "the restaurant"
+            ]
+          },
+          "turn_num": 16,
+          "utterance": "I'm sorry, there's someone talking here and getting me turned around. I'd like a"
+        }
+      ]
+    }
+  ]
+}

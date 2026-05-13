@@ -1,0 +1,413 @@
+{
+  "batch": 1,
+  "model": "deepseek-v4-pro",
+  "sessions": 3,
+  "turns": 13,
+  "avg_intent_f1": 0.0,
+  "avg_slot_key_f1": 0.495,
+  "details": [
+    {
+      "dialogue_id": "PMUL3969.json",
+      "services": [
+        "hotel"
+      ],
+      "turns": [
+        {
+          "turn": 0,
+          "intent_f1": 0.0,
+          "slot_f1": 1.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:inform"
+          ],
+          "gt_slots": {
+            "hotel.hotel-internet": [
+              "yes"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-internet": [
+              "free"
+            ]
+          }
+        },
+        {
+          "turn": 2,
+          "intent_f1": 0.0,
+          "slot_f1": 0.667,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:search"
+          ],
+          "gt_slots": {
+            "hotel.hotel-pricerange": [
+              "cheap"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-pricerange": [
+              "cheap"
+            ],
+            "hotel.hotel-internet": [
+              "free wifi"
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "intent_f1": 0.0,
+          "slot_f1": 1.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:inform"
+          ],
+          "gt_slots": {
+            "hotel.hotel-area": [
+              "dontcare"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-area": [
+              "dontcare"
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "intent_f1": 0.0,
+          "slot_f1": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel"
+          ],
+          "pred_intents": [
+            "hotel:book"
+          ],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "saturday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "5"
+            ],
+            "hotel.hotel-bookstay": [
+              "2"
+            ],
+            "hotel.hotel-name": [
+              "alexander bed and breakfast"
+            ]
+          },
+          "pred_slots": {
+            "hotel.booking-nights": [
+              "2"
+            ],
+            "hotel.booking-people": [
+              "5"
+            ],
+            "hotel.booking-day": [
+              "Saturday"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dialogue_id": "PMUL3071.json",
+      "services": [
+        "attraction",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "turn": 0,
+          "intent_f1": 0.0,
+          "slot_f1": 0.0,
+          "gt_intents": [
+            "attraction:find_attraction"
+          ],
+          "pred_intents": [
+            "attraction:find"
+          ],
+          "gt_slots": {
+            "attraction.attraction-name": [
+              "adc theatre"
+            ]
+          },
+          "pred_slots": {
+            "attraction.name": [
+              "adc theatre"
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "intent_f1": 0.0,
+          "slot_f1": 1.0,
+          "gt_intents": [
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:request_info"
+          ],
+          "gt_slots": {
+            "hotel.hotel-name": [
+              "gonville hotel"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-name": [
+              "Gonville Hotel"
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "intent_f1": 0.0,
+          "slot_f1": 0.0,
+          "gt_intents": [
+            "hotel:book_hotel"
+          ],
+          "pred_intents": [
+            "hotel:book"
+          ],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "friday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "5"
+            ],
+            "hotel.hotel-bookstay": [
+              "5"
+            ]
+          },
+          "pred_slots": {
+            "hotel.name": [
+              "Gonville Hotel"
+            ],
+            "hotel.book_people": [
+              "5"
+            ],
+            "hotel.book_day": [
+              "Friday"
+            ],
+            "hotel.book_stay": [
+              "5"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "dialogue_id": "MUL0161.json",
+      "services": [
+        "restaurant",
+        "taxi",
+        "hotel"
+      ],
+      "turns": [
+        {
+          "turn": 0,
+          "intent_f1": 0.0,
+          "slot_f1": 1.0,
+          "gt_intents": [
+            "restaurant:find_restaurant",
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "restaurant:find"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-area": [
+              "centre"
+            ],
+            "restaurant.restaurant-pricerange": [
+              "expensive"
+            ]
+          },
+          "pred_slots": {
+            "restaurant.restaurant-pricerange": [
+              "expensive"
+            ],
+            "restaurant.restaurant-area": [
+              "center"
+            ]
+          }
+        },
+        {
+          "turn": 4,
+          "intent_f1": 0.0,
+          "slot_f1": 0.0,
+          "gt_intents": [
+            "restaurant:book_restaurant",
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "restaurant:restaurant-book"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-bookday": [
+              "friday"
+            ],
+            "restaurant.restaurant-bookpeople": [
+              "1"
+            ],
+            "restaurant.restaurant-booktime": [
+              "16:45"
+            ],
+            "restaurant.restaurant-name": [
+              "cambridge chop house"
+            ]
+          },
+          "pred_slots": {
+            "restaurant-restaurant-bookday": [
+              "friday"
+            ],
+            "restaurant-restaurant-booktime": [
+              "16:45"
+            ],
+            "restaurant-restaurant-bookpeople": [
+              "1"
+            ]
+          }
+        },
+        {
+          "turn": 6,
+          "intent_f1": 0.0,
+          "slot_f1": 0.667,
+          "gt_intents": [
+            "restaurant:book_restaurant",
+            "taxi:find_taxi",
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "restaurant:book"
+          ],
+          "gt_slots": {
+            "restaurant.restaurant-booktime": [
+              "15:45"
+            ]
+          },
+          "pred_slots": {
+            "restaurant.restaurant-booktime": [
+              "15:45"
+            ],
+            "restaurant.restaurant-bookday": [
+              "friday"
+            ]
+          }
+        },
+        {
+          "turn": 8,
+          "intent_f1": 0.0,
+          "slot_f1": 0.857,
+          "gt_intents": [
+            "restaurant:book_restaurant",
+            "hotel:find_hotel"
+          ],
+          "pred_intents": [
+            "hotel:search"
+          ],
+          "gt_slots": {
+            "hotel.hotel-internet": [
+              "yes"
+            ],
+            "hotel.hotel-parking": [
+              "yes"
+            ],
+            "hotel.hotel-pricerange": [
+              "expensive"
+            ],
+            "hotel.hotel-type": [
+              "hotel"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-pricerange": [
+              "expensive"
+            ],
+            "hotel.hotel-internet": [
+              "free"
+            ],
+            "hotel.hotel-parking": [
+              "yes"
+            ]
+          }
+        },
+        {
+          "turn": 10,
+          "intent_f1": 0.0,
+          "slot_f1": 0.25,
+          "gt_intents": [
+            "restaurant:book_restaurant",
+            "hotel:book_hotel"
+          ],
+          "pred_intents": [
+            "hotel:book"
+          ],
+          "gt_slots": {
+            "hotel.hotel-bookday": [
+              "friday"
+            ],
+            "hotel.hotel-bookpeople": [
+              "1"
+            ],
+            "hotel.hotel-bookstay": [
+              "4"
+            ],
+            "hotel.hotel-name": [
+              "gonville hotel"
+            ]
+          },
+          "pred_slots": {
+            "hotel.hotel-name": [
+              "gonville hotel"
+            ],
+            "hotel.hotel-people": [
+              "1"
+            ],
+            "hotel.hotel-stay": [
+              "4 nights"
+            ],
+            "hotel.hotel-day": [
+              "friday"
+            ]
+          }
+        },
+        {
+          "turn": 12,
+          "intent_f1": 0.0,
+          "slot_f1": 0.0,
+          "gt_intents": [
+            "taxi:find_taxi",
+            "restaurant:book_restaurant"
+          ],
+          "pred_intents": [
+            "taxi:booking"
+          ],
+          "gt_slots": {
+            "taxi.taxi-arriveby": [
+              "15:45"
+            ],
+            "taxi.taxi-departure": [
+              "gonville hotel"
+            ],
+            "taxi.taxi-destination": [
+              "cambridge chop house"
+            ]
+          },
+          "pred_slots": {
+            "taxi.arriveby": [
+              "15:45"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
