@@ -44,7 +44,10 @@ class SessionAssetExtractor:
         if not api_key:
             return None
         if self._client is None:
-            from openai import OpenAI
+            try:
+                from openai import OpenAI
+            except ModuleNotFoundError:
+                return None
             kwargs: dict[str, Any] = {"api_key": api_key}
             if base_url:
                 kwargs["base_url"] = base_url

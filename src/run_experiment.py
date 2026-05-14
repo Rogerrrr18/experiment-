@@ -26,7 +26,8 @@ from datetime import datetime
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.session_asset_extractor import SessionAssetExtractor
-from src.pilot_runner import PilotExperimentRunner, generate_radar_svg, summarize_results, write_json, write_jsonl
+from src.pilot_runner import PilotExperimentRunner, eval_turn_to_dict, generate_radar_svg, summarize_results, write_json, write_jsonl
+from src.report_html import write_html_report
 
 
 def load_multiwoz(data_dir: str, max_sessions: int | None = None) -> list[dict]:
@@ -133,12 +134,14 @@ def run_pilot(dataset: str, data_dir: str, sessions: int, output_dir: str, step:
             continue
 
         locked_asset = extractor.load_asset(locked_path)
-        baseline = runner.run_baseline(locked_asset, session)
+        baseline, baseline_rows = runner.run_baseline(locked_asset, session)
         dynamic, turn_rows = runner.run_dynamic(locked_asset)
         baseline_metrics.append(baseline)
         dynamic_metrics.append(dynamic)
+        for row in baseline_rows:
+            run_log_rows.append(eval_turn_to_dict(row))
         for row in turn_rows:
-            run_log_rows.append(row.__dict__)
+            run_log_rows.append(eval_turn_to_dict(row))
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     write_json(out_root / f"draft_assets_{timestamp}.json", {"assets": draft_assets, "validation_errors": validation_errors})
@@ -147,7 +150,7 @@ def run_pilot(dataset: str, data_dir: str, sessions: int, output_dir: str, step:
         return {"status": "ok", "step": "extract", "assets": len(draft_assets), "validation_errors": validation_errors}
 
     summary = summarize_results(baseline_metrics, dynamic_metrics)
-    write_json(out_root / f"metrics_summary_{timestamp}.json", {
+    summary_payload = {
         "schema_version": "2026-02-intent-refill-v1",
         "prompt_version": "pilot-v1",
         "dataset": dataset,
@@ -156,10 +159,20 @@ def run_pilot(dataset: str, data_dir: str, sessions: int, output_dir: str, step:
         "dynamic_metrics": [m.to_dict() for m in dynamic_metrics],
         "summary": summary,
         "validation_errors": validation_errors,
-    })
-    write_jsonl(out_root / f"run_log_{timestamp}.jsonl", run_log_rows)
+    }
+    write_json(out_root / f"metrics_summary_{timestamp}.json", summary_payload)
+    run_log_path = out_root / f"run_log_{timestamp}.jsonl"
+    write_jsonl(run_log_path, run_log_rows)
     radar_path = out_root / f"radar_{timestamp}.svg"
     generate_radar_svg(summary, radar_path)
+    html_report_path = out_root / f"report_{timestamp}.html"
+    write_html_report(
+        html_report_path,
+        dataset=dataset,
+        summary_payload=summary_payload,
+        run_log_rows=run_log_rows,
+        generated_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    )
 
     return {
         "status": "ok",
@@ -167,6 +180,8 @@ def run_pilot(dataset: str, data_dir: str, sessions: int, output_dir: str, step:
         "sessions": len(dynamic_metrics),
         "summary": summary,
         "radar": str(radar_path),
+        "run_log": str(run_log_path),
+        "html_report": str(html_report_path),
     }
 
 

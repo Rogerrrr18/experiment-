@@ -54,19 +54,48 @@ class JudgeDecision:
     label: str  # SATISFIED | NOT_SATISFIED | DEVIATION
     rationale: str
     evidence_quote: str
+    fail_category: str = ""
+    directly_answered: bool = False
+    delivered_result: bool = False
+    asked_followup: bool = False
+    leaked_prompt: bool = False
+    parroted_user: bool = False
+    turn_score: float = 0.0
+    source: str = "heuristic"  # heuristic | llm
+    judge_model: str = ""
+    prompt_text: str = ""
+    raw_response: str = ""
 
 
 @dataclass
 class EvalTurn:
+    eval_mode: str
     session_id: str
     intent_index: int
+    intent_text: str
+    success_criteria: str
     cycle_index: int
     budget: int
+    budget_used: int
     user_text: str
+    system_prefix: str
     assistant_text: str
+    sim_strategy: str
+    sim_note: str
     judge_label: str
     rationale: str
     evidence_quote: str
+    fail_category: str
+    directly_answered: bool
+    delivered_result: bool
+    asked_followup: bool
+    leaked_prompt: bool
+    parroted_user: bool
+    turn_score: float
+    judge_source: str
+    judge_model: str
+    judge_prompt: str
+    judge_raw_response: str
     event: str
 
 
@@ -83,6 +112,11 @@ class SessionMetrics:
     followup_per_intent: float
     deviation_rate: float
     turn_efficiency: float
+    direct_answer_rate: float
+    result_delivery_rate: float
+    prompt_leak_rate: float
+    parrot_rate: float
+    avg_turn_score: float
     composite_score: float
 
     def to_dict(self) -> dict[str, Any]:
