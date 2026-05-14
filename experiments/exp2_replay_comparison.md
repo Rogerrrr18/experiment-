@@ -1,38 +1,14 @@
-# 实验二：回放策略对比
+# Legacy Notice: exp2_replay_comparison
 
-## 目标
-对比三种回放策略的评测效果，验证动态意图驱动的优势。
+该文档已归档。
 
-## 三种策略
+旧版设计试图比较：
+- fixed replay
+- dynamic intent replay
+- free simuser
 
-| 策略 | 描述 | SimUser 行为 |
-|------|------|--------------|
-| **固定回放** (baseline) | 逐字回放原始 user query | 无自适应 |
-| **动态意图回放** (方法二) | 按意图序列动态生成 query | 覆盖→前进，未覆盖→追问 |
-| **自由 SimUser** (对照) | LLM 自由扮演用户 | 无意图约束 |
+但当前仓库主线已重构为 **Pilot 单臂动态回放 + 原始 session 基线 B 对比**。
 
-## 变量
-| 变量 | 取值 | 说明 |
-|------|------|------|
-| 回放策略 | `fixed`, `dynamic_intent`, `free_simuser` | 核心自变量 |
-| Agent 行为 | `helpful`, `partial`, `evasive` | 控制变量 |
+原因：首期更关注工程可落地与结果可审计，而不是先做研究型多臂比较。
 
-## 指标
-| 指标 | 说明 |
-|------|------|
-| 意图达成率 | 成功达成的意图比例 |
-| 追问效率 | 达成同样意图所需的追问轮次 |
-| 偏离率 | 对话中偏离意图的比例 |
-| 总分 | 加权综合分 |
-| 评测一致性 | 同一 session 多次评测的分数方差 |
-
-## 执行步骤
-
-```bash
-python src/run_experiment.py --exp exp2 --dataset multiwoz --sessions 30
-```
-
-## 预期结果
-- 动态意图回放：意图达成率高，偏离率低，追问效率最优
-- 固定回放：意图达成率中，但"错位"问题明显（Agent 提前解决后仍追问）
-- 自由 SimUser：意图达成率最高但评测不可复现（方差大）
+请优先阅读：`experiments/pilot_dynamic_intent.md`

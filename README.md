@@ -1,72 +1,195 @@
-# 动态意图驱动回放评测 — 实验复现
+# 基于意图指针的动态评测效果实验（Pilot）
 
-基于 [历史数据回放评测方法调研](https://bytedance.feishu.cn/docx/STwed3Abjo0NdqxYX4zcjcgfnfh) 中「方法二：动态意图驱动的回放评测」的算法实现与实验验证。
+这是一个按 **新方案 v1.0** 重构后的仓库：
 
-## 方法概要
+> **单臂动态回放 + 原始 session 基线 B 对比 + locked schema assets + refillables 注入**
 
-从历史 session 中提取意图序列作为评测核心，将 user query 抽象为意图列表。评测时 SimUser 按意图顺序与 Agent 交互，但每个意图的达成判定是动态的：
-- Agent 回复覆盖当前意图 → 自动切换到下一意图
-- Agent 未覆盖 → 换方式追问（最多 N 次）
-- Agent 完全偏离 → 触发偏离检测
+当前仓库不再以旧的 `exp1~exp5` 研究矩阵为主线，而是先聚焦一个更可落地的工程化 pilot：
 
-### 评分公式
+- 从 CSV / MultiWOZ session 读入历史对话
+- 一次抽取出 `intent_sequence + refillables`
+- 允许人工修订并锁版为 `*_locked.json`
+- 只消费 locked assets 跑动态评测
+- 产出：
+  - 原始 session 基线 **B**
+  - 动态回放结果 **D**
+  - `run_log.jsonl`
+  - `metrics_summary.json`
+  - `radar.svg`
 
+---
+
+## 1. 当前实验主线
+
+### 目标
+验证以下闭环能否稳定工作：
+
+```text
+CSV / Session
+→ schema 化抽取
+→ locked asset
+→ 动态回放（意图指针 + 预算 + refillables）
+→ B / D 指标对比
+→ 雷达图与日志审计
 ```
-总分 = 意图达成率 × 0.5 + 追问效率 × 0.2 + (1 - 偏离率) × 0.2 + 轮次效率 × 0.1
+
+### 首期冻结决策
+- **单臂动态回放**，不再把 fixed/free 作为首要主线
+- 对照使用 **原始 session 基线 B**，不是多 replay 机制大乱斗
+- Judge 为三分类：
+  - `SATISFIED`
+  - `NOT_SATISFIED`
+  - `DEVIATION`
+- 允许先抽取、再人工修订、再锁版
+- 优先支持本地可复现；外部 LLM 调用为可选增强
+
+---
+
+## 2. 目录结构
+
+```text
+├── extract_session.schema.json          # 锁定 Schema
+├── src/
+│   ├── pilot_types.py                   # Pilot 核心数据结构
+│   ├── session_asset_extractor.py       # session → draft/locked asset
+│   ├── pilot_runner.py                  # B/D 评测、日志、雷达输出
+│   ├── run_experiment.py                # 新版主入口
+│   ├── intent_extractor.py              # legacy
+│   ├── replay_evaluator.py              # legacy
+│   ├── sim_user.py                      # legacy
+│   └── judge.py                         # legacy
+├── experiments/
+│   ├── pilot_dynamic_intent.md          # 新主方案说明
+│   ├── exp1_intent_extraction.md        # legacy 归档说明
+│   ├── exp2_replay_comparison.md        # legacy 归档说明
+│   ├── exp3_reask_strategy.md           # legacy 归档说明
+│   ├── exp4_scoring_sensitivity.md      # legacy 归档说明
+│   └── exp5_cross_dataset.md            # legacy 归档说明
+└── results/
 ```
 
-## 5 组实验
+---
 
-| # | 实验 | 类型 | 核心问题 |
-|---|------|------|----------|
-| 1 | 意图提取质量消融 | 消融 | LLM/模板对意图提取精度的影响 |
-| 2 | 回放策略对比 | 对比 | 动态意图 vs 固定回放 vs 自由 SimUser |
-| 3 | 追问策略消融 | 消融 | 追问次数 N 对评测公平性的影响 |
-| 4 | 评分权重敏感性 | 敏感性 | 权重配置对评分一致性的影响 |
-| 5 | 跨数据集泛化 | 泛化 | 意图提取器在未见领域的迁移能力 |
+## 3. 输入数据
 
-## 推荐数据集
+当前默认支持：
 
-| 优先级 | 数据集 | 语言 | 对话数 | 平均轮次 | 下载方式 |
-|--------|--------|------|--------|----------|----------|
-| 1 | MultiWOZ 2.2 | EN | 10,438 | 13.7 | `git clone` |
-| 2 | ABCD | EN | 10,042 | 17-22 | `git clone` |
-| 3 | SGD | EN | 22,825 | 20 | `git clone` |
-| 4 | KdConv | ZH | 4,500 | 19 | `git clone` |
+### A. turn-level CSV
+建议最小列集：
+- `session_id` / `dialogue_id`
+- `turn_index` / `turn_num`
+- `role` / `speaker`
+- `content` / `utterance`
+- `timestamp`（可选）
 
-## 快速开始
+### B. MultiWOZ JSON/JSONL
+如果 `data/multiwoz/` 下存在原始 MultiWOZ 文件，也会自动读取。
+
+---
+
+## 4. 运行方式
+
+### 4.1 完整跑通 pilot
 
 ```bash
-# 1. 安装依赖
-pip install -r requirements.txt
-
-# 2. 下载数据集
-bash data/download_datasets.sh
-
-# 3. 运行实验
-python src/run_experiment.py --exp exp1  # 单实验
-python src/run_experiment.py --all       # 全部实验
+python src/run_experiment.py \
+  --dataset multiwoz \
+  --data-dir . \
+  --sessions 10 \
+  --output-dir results/pilot
 ```
 
-## 项目结构
+### 4.2 只做 schema 抽取与锁版草稿
 
-```
-├── src/
-│   ├── intent_extractor.py   # 意图序列提取
-│   ├── sim_user.py           # 动态 SimUser
-│   ├── judge.py              # Rubric 裁判
-│   ├── replay_evaluator.py   # 回放评测编排
-│   └── run_experiment.py     # 实验运行入口
-├── experiments/              # 实验设计文档
-├── data/                     # 数据下载脚本
-├── docs/                     # 数据集报告
-└── results/                  # 实验结果（运行后生成）
+```bash
+python src/run_experiment.py \
+  --dataset multiwoz \
+  --data-dir . \
+  --sessions 10 \
+  --step extract \
+  --output-dir results/pilot
 ```
 
-## 可复现性保证
+---
 
-- 所有 LLM 调用固定 `temperature=0.3`，`seed=42`
-- 意图提取使用固定 prompt 模板
-- SimUser 仅在模板内变化，不自由发挥
-- 裁判使用结构化 rubric（覆盖/部分覆盖/未覆盖 三档）
-- 偏离检测使用 embedding 相似度 + 关键词匹配（确定性判断）
+## 5. 输出内容
+
+运行后会生成：
+
+- `assets/{session_id}.draft.json`
+- `assets/{session_id}_locked.json`
+- `draft_assets_*.json`
+- `run_log_*.jsonl`
+- `metrics_summary_*.json`
+- `radar_*.svg`
+
+其中：
+
+### `draft.json`
+首轮自动抽取结果，允许人工修订。
+
+### `*_locked.json`
+锁版后的正式资产。后续动态评测只消费这个文件。
+
+### `metrics_summary`
+包含：
+- per-session baseline B metrics
+- per-session dynamic D metrics
+- B vs D 的 summary 与 delta
+
+### `radar.svg`
+将以下维度映射到同一雷达图：
+- Intent Completion
+- Low Followup
+- Low Deviation
+- Turn Efficiency
+- Composite
+
+---
+
+## 6. 环境变量（可选）
+
+如果你要接 SiliconFlow / OpenAI 兼容网关，可设置：
+
+```bash
+export ZEVAL_JUDGE_BASE_URL="https://api.siliconflow.cn/v1"
+export ZEVAL_JUDGE_MODEL="Qwen/Qwen3.5-27B"
+export ZEVAL_JUDGE_ENABLE_THINKING="false"
+export ZEVAL_INTENT_EXPERIMENT_API_KEY="..."
+```
+
+回退顺序：
+- `ZEVAL_INTENT_EXPERIMENT_API_KEY`
+- `ZEVAL_JUDGE_API_KEY`
+- `OPENAI_API_KEY`
+
+未配置时，仓库会走 **本地 heuristic fallback**，仍可跑通 pipeline。
+
+---
+
+## 7. 当前方法论边界
+
+这版仓库刻意偏向 **pilot / 工程试跑**，不是最终研究版：
+
+- 先验证 pipeline、schema、locked asset、日志审计、B/D 对比是否成立
+- 暂不把跨数据集、复杂消融、显著性检验作为主线
+- 旧 `exp1~exp5` 保留为 **legacy 归档**，避免混淆当前方向
+
+如果后续要继续升级，推荐顺序是：
+
+1. 人工修订一批 locked assets
+2. 提升 Judge 与 extractor 的人工一致性
+3. 接真实待测 Agent 通道
+4. 再重建更严谨的 method-eval / product-eval
+
+---
+
+## 8. 一句话定位
+
+这个仓库现在的定位不是：
+
+> “证明动态意图回放在研究上全面优于所有方法”
+
+而是：
+
+> **“先把意图指针动态评测这条工程链路做成一个可信、可审计、可解释的 pilot。”**

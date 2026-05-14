@@ -52,9 +52,10 @@ class RubricJudge:
         self.temperature = temperature
         self.num_samples = num_samples
         self._client = None
+        self._embedder = None
 
     def _get_client(self):
-        if self._client is None:
+        if self._client is None and os.environ.get("OPENAI_API_KEY"):
             from openai import OpenAI
             self._client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
         return self._client
@@ -133,14 +134,7 @@ class RubricJudge:
         achieve_condition: str,
     ) -> Judgement:
         """确定性规则裁判（不依赖 LLM）"""
-        # 使用 embedding 相似度 + 关键词匹配
-        from sentence_transformers import SentenceTransformer
-        import numpy as np
-
-        model = SentenceTransformer("all-MiniLM-L6-v2")
-        intent_emb = model.encode(intent_description)
-        reply_emb = model.encode(agent_reply)
-        similarity = float(np.dot(intent_emb, reply_emb) / (np.linalg.norm(intent_emb) * np.linalg.norm(reply_emb)))
+        similarity = self._semantic_similarity(intent_description, agent_reply)
 
         # 关键词匹配
         intent_keywords = set(intent_description.lower().split())
@@ -166,3 +160,21 @@ class RubricJudge:
             confidence=confidence,
             reasoning=f"Similarity={similarity:.3f}, KeywordOverlap={keyword_overlap:.3f}",
         )
+
+    def _semantic_similarity(self, text_a: str, text_b: str) -> float:
+        """优先用 sentence-transformers；不可用时退化为纯本地词集相似度。"""
+        try:
+            import numpy as np
+            if self._embedder is None:
+                from sentence_transformers import SentenceTransformer
+                self._embedder = SentenceTransformer("all-MiniLM-L6-v2")
+            a_emb = self._embedder.encode(text_a)
+            b_emb = self._embedder.encode(text_b)
+            denom = (np.linalg.norm(a_emb) * np.linalg.norm(b_emb)) or 1.0
+            return float(np.dot(a_emb, b_emb) / denom)
+        except Exception:
+            a = {w for w in text_a.lower().split() if w}
+            b = {w for w in text_b.lower().split() if w}
+            if not a or not b:
+                return 0.0
+            return len(a & b) / max(len(a | b), 1)
