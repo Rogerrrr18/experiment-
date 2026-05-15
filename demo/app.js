@@ -66,7 +66,13 @@ function collectCompareAgents() {
 function renderSummary(result) {
   const best = [...result.runs].sort((a, b) => b.dynamic_metrics.composite_score - a.dynamic_metrics.composite_score)[0];
   summaryPanel.innerHTML = `
-    <h2>总体结果</h2>
+    <div class="section-head">
+      <div>
+        <div class="eyebrow small">Run Summary</div>
+        <h2>总体结果</h2>
+      </div>
+      <div class="run-meta">Session：${esc(result.session_id)}｜${esc(result.judge_mode_cn)}</div>
+    </div>
     <div class="cards">
       ${summaryCard('原始基线综合分', result.baseline_metrics.composite_score)}
       ${summaryCard('原始基线意图完成率', result.baseline_metrics.intent_completion_rate)}
@@ -76,8 +82,15 @@ function renderSummary(result) {
       ${summaryCard('最佳动态综合分', best ? best.dynamic_metrics.composite_score : '-')}
       ${summaryCard('最佳对象', best ? best.display_name : '-')}
     </div>
-    <p class="muted">为什么你之前看到“评审提示词 / 评审原始输出”是空白：因为当时走的是启发式评审，代码没有把启发式规则显式写回日志。现在我已经补上了，即使不是 LLM Judge，也会显示“启发式评审说明”和结构化原始输出。</p>
-      <p class="muted">评审模型：${result.judge_model}｜接口地址：${result.api_base_url}</p>
+    <div class="explain-box">
+      <strong>弱基线 vs 中等基线怎么理解？</strong>
+      <ul>
+        <li><b>弱基线</b>：近似“只会复述/包装用户话”的低能力 Agent，用来当下限参照。</li>
+        <li><b>中等基线</b>：会读内部 refillables 事实包，能把确认号、电话、实体名等已知事实自然返回给用户，但仍不是完整真实 Agent。</li>
+        <li><b>真实模型</b>：填入模型名后，会走 API 调用，观察真实 Agent 是否比中等基线更会处理约束、追问与上下文。</li>
+      </ul>
+    </div>
+    <p class="muted">评审模型：${result.judge_model}｜接口地址：${result.api_base_url}</p>
 
     <h3>多模型对比表</h3>
     <table class="compare-table">
@@ -136,14 +149,38 @@ function renderDiagnosis(result) {
 
 function renderAsset(result) {
   const intents = result.asset.intent_sequence || [];
+  const refillables = result.asset.refillables || [];
   assetPanel.innerHTML = `
-    <h2>锁版资产（意图序列）</h2>
-    <table>
-      <thead><tr><th>意图编号</th><th>意图内容</th><th>成功标准</th><th>历史用户轮数</th></tr></thead>
-      <tbody>
-        ${intents.map(i => `<tr><td>${i.intent_index}</td><td>${esc(i.intent_text)}</td><td>${esc(i.success_criteria)}</td><td>${i.turn_span_user_turns}</td></tr>`).join('')}
-      </tbody>
-    </table>
+    <div class="section-head">
+      <div>
+        <div class="eyebrow small">Locked Asset</div>
+        <h2>锁版资产</h2>
+      </div>
+      <div class="run-meta">${intents.length} 个意图｜${refillables.length} 个可回填事实</div>
+    </div>
+    <div class="asset-layout">
+      <div>
+        <h3>意图指针链</h3>
+        <table>
+          <thead><tr><th>#</th><th>意图指针</th><th>成功标准</th><th>历史用户轮数</th></tr></thead>
+          <tbody>
+            ${intents.map(i => `<tr><td>${i.intent_index}</td><td><code>${esc(i.intent_text)}</code></td><td>${esc(i.success_criteria)}</td><td>${i.turn_span_user_turns}</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <h3>可回填事实包</h3>
+        <div class="fact-list">
+          ${refillables.slice(0, 18).map(r => `
+            <div class="fact-item">
+              <code>${esc(r.key || `refill_${r.refill_index}`)}</code>
+              <span>${esc(r.refill_reference)}</span>
+            </div>
+          `).join('')}
+          ${refillables.length > 18 ? `<div class="fact-more">还有 ${refillables.length - 18} 条事实未展开</div>` : ''}
+        </div>
+      </div>
+    </div>
   `;
   assetPanel.classList.remove('hidden');
 }

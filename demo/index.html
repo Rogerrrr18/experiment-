@@ -9,8 +9,9 @@
 <body>
   <div class="page">
     <header class="hero">
-      <h1>动态回放评测对比台</h1>
-      <p>一次点击，同时比较多个 Agent / 真实模型；并把<strong>模拟用户工作过程</strong>、<strong>评审工作过程</strong>、<strong>原始输出</strong>都完整可视化。</p>
+      <div class="eyebrow">ZERORE Eval Pilot</div>
+      <h1>意图指针动态评测对比台</h1>
+      <p>把历史 session 转成<strong>意图状态机</strong>与<strong>可回填事实包</strong>，再比较不同 Agent 在动态交互中的完成率、追问负担、偏航和提示泄漏。</p>
     </header>
 
     <section class="panel controls">
@@ -45,8 +46,20 @@
 
       <div class="chooser">
         <div class="chooser-title">对比对象（可多选）</div>
-        <label class="check"><input type="checkbox" id="agentWeak" checked /> 弱基线（只会复述）</label>
-        <label class="check"><input type="checkbox" id="agentScripted" checked /> 中等基线（会利用已知事实）</label>
+        <div class="baseline-grid">
+          <label class="baseline-option weak">
+            <input type="checkbox" id="agentWeak" checked />
+            <span class="baseline-title">弱基线</span>
+            <span class="baseline-desc">只会把用户需求包装后复述；可读到事实包，但不会真正规划或调用工具。</span>
+            <span class="baseline-use">用途：暴露“复述型客服”的下限。</span>
+          </label>
+          <label class="baseline-option scripted">
+            <input type="checkbox" id="agentScripted" checked />
+            <span class="baseline-title">中等基线</span>
+            <span class="baseline-desc">会解析内部事实包并基于确认号、电话、实体等已知结果作答。</span>
+            <span class="baseline-use">用途：验证 refillables 是否能支撑无工具 Agent 完成任务。</span>
+          </label>
+        </div>
       </div>
 
       <label class="models-box">

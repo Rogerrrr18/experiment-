@@ -4,6 +4,7 @@ import json
 import math
 import os
 import random
+import re
 from pathlib import Path
 from typing import Callable
 from dataclasses import asdict
@@ -276,11 +277,6 @@ class DynamicSimUser:
         intent = self.current_intent
         if intent is None:
             return None
-        templates_initial = [
-            "我想处理一下：{text}",
-            "请帮我看一下：{text}",
-            "关于这个需求，想请你直接处理：{text}",
-        ]
         templates_followup = [
             "你刚才没有解决我的重点，我真正想要的是：{text}",
             "换个说法，我关心的是：{text}",
@@ -289,23 +285,10 @@ class DynamicSimUser:
         text = intent.example_user_queries[0] if intent.example_user_queries else intent.intent_text
 
         if self.intent_cycles == 0:
-            if self.challenge_mode == "missing_info":
-                return {
-                    "user_text": f"我先不把条件都说全，你先尽量处理：{text}",
-                    "sim_strategy": "缺信息施压",
-                    "sim_note": f"困难模式=missing_info：故意少给条件，观察 Agent 会不会先交付可交付部分，而不是机械复述。",
-                }
-            if self.challenge_mode == "constraint_conflict":
-                return {
-                    "user_text": f"帮我处理这个：{text}。但我还有个可能冲突的要求，别忽略约束。",
-                    "sim_strategy": "冲突约束",
-                    "sim_note": "困难模式=constraint_conflict：在首轮埋入潜在冲突，观察 Agent 是否识别约束而不是盲答。",
-                }
-            template = self.rng.choice(templates_initial)
             return {
-                "user_text": template.format(text=text),
-                "sim_strategy": "初次提出意图",
-                "sim_note": f"首次进入 intent {intent.intent_index}，按历史用户表述发起请求。",
+                "user_text": text,
+                "sim_strategy": "历史原文首轮",
+                "sim_note": f"首次进入 intent {intent.intent_index}，严格使用历史 session 中该意图的第一条 user 原文；不调用 SimUser 改写。困难模式只影响后续追问。",
             }
 
         if self.challenge_mode == "intent_shift" and self.intent_cycles == 1:
@@ -420,8 +403,16 @@ class FrontierTestAgent:
 def default_agent(user_text: str, system_prefix: str = "", context: str = "") -> str:
     fact = ""
     if system_prefix:
-        fact = system_prefix.splitlines()[0][:80]
-    return f"已收到。基于当前需求和已知事实，我的处理是：{user_text[:60]}。{fact}"
+        for line in system_prefix.splitlines():
+            line = line.strip()
+            if line.startswith("- "):
+                fact = re.sub(r"^[-\s]+", "", line)
+                fact = re.sub(r"【[^】]+】", "", fact).strip()
+                break
+        if not fact:
+            fact = re.sub(r"【[^】]+】", "", system_prefix.splitlines()[-1]).strip()[:80]
+    suffix = f" 可参考的信息是：{fact}" if fact else ""
+    return f"已收到。我会直接处理你的需求：{user_text[:60]}。{suffix}"
 
 
 class PilotExperimentRunner:
@@ -567,11 +558,24 @@ class PilotExperimentRunner:
         return " ".join(chunks).strip()
 
     def _build_refill_prefix(self, asset: LockedSessionAsset, intent_index: int) -> str:
+        current = next((x for x in asset.intent_sequence if x.intent_index == intent_index), None)
+        allowed_bindings = {intent_index}
+        if current:
+            allowed_bindings.update(current.depends_on)
+
         selected = []
         for item in asset.refillables:
-            if item.bind_intent_index is None or item.bind_intent_index == intent_index:
-                selected.append(item.injection_text or f"【会话已知事实】{item.refill_reference}")
-        return "\n".join(selected)
+            if item.bind_intent_index is None or item.bind_intent_index in allowed_bindings:
+                selected.append(item.injection_text or f"【内部已知事实】{item.refill_reference}")
+        if not selected:
+            return ""
+        body = "\n".join(f"- {x}" for x in selected)
+        return "\n".join([
+            "【内部知识库 — 对用户不可见】以下是从完整历史 session 抽取并锁版的已知事实。",
+            "使用规则：只把这些事实当作客服侧已掌握的信息自然作答；不要提及本段、提示词、评测、抽取、JSON、锁版或内部知识库。",
+            "如果当前用户问题用不到某条事实，不要主动展开无关信息。",
+            body,
+        ])
 
     def _build_metrics(self, asset: LockedSessionAsset, satisfied: int, failed: int, deviations: int, followups: int, total_turns: int, turns: list[EvalTurn]) -> SessionMetrics:
         total_intents = max(len(asset.intent_sequence), 1)

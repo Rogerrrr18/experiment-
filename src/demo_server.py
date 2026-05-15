@@ -46,7 +46,12 @@ class DemoAgents:
 
     @staticmethod
     def scripted_context(user_text: str, system_prefix: str = "", context: str = "") -> str:
-        raw_fact = system_prefix.replace("【会话已知事实】", "").replace("请在不重复调用外部系统的前提下，优先基于该事实作答。", "").strip()
+        fact_lines = []
+        for line in system_prefix.splitlines():
+            line = line.strip()
+            if line.startswith("- "):
+                fact_lines.append(re.sub(r"【[^】]+】", "", line[2:]).strip())
+        raw_fact = "；".join(fact_lines) if fact_lines else system_prefix.replace("【会话已知事实】", "").replace("【内部已知事实】", "").replace("请在不重复调用外部系统的前提下，优先基于该事实作答。", "").strip()
         fact = raw_fact.split("：", 1)[-1].strip() if raw_fact else ""
         text = user_text.lower()
         if any(x in text for x in ["thank you", "goodbye", "谢谢", "再见", "that will be all"]):
